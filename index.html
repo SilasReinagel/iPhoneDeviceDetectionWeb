@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+  <title>iPhone Device Detection</title>
+  <script src="iphoneDeviceDetect.js"></script>
+  <script>
+    const detectDevice = () => {
+      const device = iPhoneDeviceModel();
+      const h = document.createElement("h2");
+      const t = document.createTextNode(`This device is: ${device}`);
+      h.appendChild(t);        
+      document.body.appendChild(h);
+    };
+  </script> 
+</head>
+<body onload="detectDevice()">
+  <h1>iPhone Device Detection</h1>
+</body>
+</html>
