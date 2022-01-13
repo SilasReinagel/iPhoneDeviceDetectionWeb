@@ -12,19 +12,19 @@ function iPhoneDeviceModel() {
   }
 
   // iPhone 13 Series
-  if (renderer === "Apple A15 GPU")
+  if (renderer == "Apple A15 GPU")
     return "iPhone 13 Series";
   
   // iPhone 12 Series
-  if (renderer === "Apple A14 GPU")
+  if (renderer == "Apple A14 GPU")
     return "iPhone 12 Series";
 
   // iPhone 11 Series
-  if (renderer === "Apple A13 GPU")
+  if (renderer == "Apple A13 GPU")
     return "iPhone 11 Series";
 
   // iPhone XS Series (including XR)
-  if (renderer === "Apple A12 GPU")
+  if (renderer == "Apple A12 GPU")
     return "iPhone XS Series";
 
   // Below from StackOverflow: https://stackoverflow.com/a/49774317
