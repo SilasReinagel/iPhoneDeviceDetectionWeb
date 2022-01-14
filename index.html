@@ -5,16 +5,19 @@
   <title>iPhone Device Detection</title>
   <script src="iphoneDeviceDetect.js"></script>
   <script>
+    const appendTextElement = (elementType, text) => {
+      const el = document.createElement(elementType);
+      el.appendChild(document.createTextNode(text));
+      document.body.appendChild(el);
+    }
+
     const detectDevice = () => {
-      const device = iPhoneDeviceModel();
-      const h = document.createElement("h2");
-      const t = document.createTextNode(`This device is: ${device}`);
-      h.appendChild(t);        
-      document.body.appendChild(h);
+      appendTextElement("h1", `iPhone Device Detection: ${detectionVersion}`);
+      appendTextElement("h2", `This device is: ${iPhoneDeviceModel()}`);
+      appendTextElement("h2", `Detected renderer: ${getDetectedGpu()}`);
     };
   </script> 
 </head>
 <body onload="detectDevice()">
-  <h1>iPhone Device Detection v0.01</h1>
 </body>
 </html>
