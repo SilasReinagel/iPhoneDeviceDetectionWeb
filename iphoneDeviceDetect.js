@@ -1,21 +1,15 @@
-const detectionVersion = '0.05';
+const detectionVersion = '0.06';
 
-let detectionRenderer;
-
-const isIphone = () => {
-    return ['iPhone Simulator','iPhone'].includes(navigator.platform);
-}
-
-const getDetectedGpu = () => {
-    if (!detectionRenderer)
-        return "None";
-    return detectionRenderer;
-}
-
-const detectionResult = (resultString, screenWidth, screenHeight, dpr, renderer) => ({ resultString, screenWidth, screenHeight, dpr, renderer });
 
 const detect = () => {
+  const detectionResult = (resultString, screenWidth, screenHeight, dpr, renderer) => ({ resultString, screenWidth, screenHeight, dpr, renderer });
+  const isIphone = () => ['iPhone Simulator','iPhone'].includes(navigator.platform);
+  const iPhone = isIphone();
+  if (!iPhone)
+    return res("Probably not an iPhone");
+
   const canvas = document.createElement("canvas");
+  let detectionRenderer;
   if (canvas) {
       const gl = canvas.getContext("webgl");
       if (gl) {
@@ -25,44 +19,33 @@ const detect = () => {
           }
       }
   }
+
   const sh = window.screen.height;
   const sw = window.screen.width;
   const dpr = window.devicePixelRatio;
   const r = detectionRenderer;
   const res = (resultString) => detectionResult(resultString, sw, sh, dpr, r);
 
-  const isiPhone = isIphone();
-  if (!isiPhone)
-    return res("Probably not an iPhone");
+  if (sw == 428 && sh == 926 && dpr == 3)
+    return res("iPhone 12 Pro Max, or 13 Pro Max");
 
-  if (sw == 1170 && sh == 2532 && dpr == 3)
-    return res("iPhone 12/13 Standard/Pro");
+  if (sw == 390 && sh == 844 && dpr == 3)
+    return res("iPhone 12, 13, 12 Pro, or 13 Pro");
 
-  if (sw == 1080 && sh == 2340 && dpr == 3)
-    return res("iPhone 12/13 mini");
-  
-  if (sw == 2778 && sh == 2778 && dpr == 3)
-    return res("iPhone 12/13 Pro Max");
-  
-  // iPhone 12 Series
-  if (r == "Apple A14 GPU")
-    return res("iPhone 12 Series");
+  if (sw == 375 && sh == 812 && dpr == 3)
+    return res("iPhone X, XS, 11 Pro, 12 mini, or 13 mini");
 
-  // iPhone 11 Series
-  if (r == "Apple A13 GPU")
-    return res("iPhone 11 Series");
+  if (sw == 414 && sh == 896)
+    if (dpr == 3)
+        return res("iPhone 11 Pro Max, or XS Max");
+    else if (dpr == 2)
+        return res("iPhone 11, or XR");
 
-  // iPhone XS Series (including XR)
-  if (r == "Apple A12 GPU")
-    return res("iPhone XS Series");
-
-  // iPhone X
-  if ((window.screen.height / window.screen.width == 812 / 375) && (window.devicePixelRatio == 3))
-      return res("iPhone X");
+  // TODO: Update the rest if the previous logic works
 
   // iPhone 6+/6s+/7+ and 8+
   if ((window.screen.height / window.screen.width == 736 / 414) && (window.devicePixelRatio == 3)) {
-      return res("iPhone 6 Plus, 6s Plus, 7 Plus or 8 Plus");
+      return res("iPhone 6 Plus, 6s Plus, 7 Plus, 8 Plus, or SE 2nd Gen");
   }
   // iPhone 6+/6s+/7+ and 8+ in zoom mode
   if ((window.screen.height / window.screen.width == 667 / 375) && (window.devicePixelRatio == 3)) {
@@ -99,7 +82,5 @@ const detect = () => {
       }
   } 
 
-  if (isiPhone)
-    return res("Unindentified iPhone");
-  return res("Probably not an iPhone");  
+  return res("Unindentified iPhone");
 }
