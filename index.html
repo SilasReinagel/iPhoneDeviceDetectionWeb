@@ -12,9 +12,11 @@
     }
 
     const detectDevice = () => {
+      const r = detect();
       appendTextElement("h1", `iPhone Device Detection: ${detectionVersion}`);
-      appendTextElement("h2", `This device is: ${iPhoneDeviceModel()}`);
-      appendTextElement("h2", `Detected renderer: ${getDetectedGpu()}`);
+      appendTextElement("h2", `This device is: ${r.resultString}`);
+      appendTextElement("h2", `Detected renderer: ${r.renderer}`);
+      appendTextElement("h2", `Screen: ${r.screenWidth}x${r.screenHeight} - ${r.dpr}dpr`);
     };
   </script> 
 </head>
