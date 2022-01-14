@@ -1,4 +1,4 @@
-const detectionVersion = '0.02';
+const detectionVersion = '0.03';
 
 let detectionRenderer;
 
