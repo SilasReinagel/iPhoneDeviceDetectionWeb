@@ -1,12 +1,8 @@
-const detectionVersion = '0.06';
-
+const detectionVersion = '0.07';
 
 const detect = () => {
   const detectionResult = (resultString, screenWidth, screenHeight, dpr, renderer) => ({ resultString, screenWidth, screenHeight, dpr, renderer });
   const isIphone = () => ['iPhone Simulator','iPhone'].includes(navigator.platform);
-  const iPhone = isIphone();
-  if (!iPhone)
-    return res("Probably not an iPhone");
 
   const canvas = document.createElement("canvas");
   let detectionRenderer;
@@ -25,6 +21,9 @@ const detect = () => {
   const dpr = window.devicePixelRatio;
   const r = detectionRenderer;
   const res = (resultString) => detectionResult(resultString, sw, sh, dpr, r);
+  const iPhone = isIphone();
+  if (!iPhone)
+    return res("Probably not an iPhone");
 
   if (sw == 428 && sh == 926 && dpr == 3)
     return res("iPhone 12 Pro Max, or 13 Pro Max");
