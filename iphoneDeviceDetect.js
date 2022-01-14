@@ -1,6 +1,11 @@
-const detectionVersion = '0.03';
+const detectionVersion = '0.04';
 
 let detectionRenderer;
+
+// From StackOverflow: https://stackoverflow.com/a/9039885/4009517
+const isIphone = () => {
+    return ['iPhone Simulator','iPhone'].includes(navigator.platform);
+}
 
 const getDetectedGpu = () => {
     if (!detectionRenderer)
@@ -24,7 +29,7 @@ const iPhoneDeviceModel = () => {
   const dpr = window.devicePixelRatio;
   const r = detectionRenderer;
 
-  const isiPhone = isPhone();
+  const isiPhone = isIphone();
   if (!isiPhone)
     return "Probably not an iPhone";
 
@@ -146,9 +151,4 @@ const iPhoneDeviceModel = () => {
   } else {
     return "Probably not an iPhone";
   }
-}
-
-// From StackOverflow: https://stackoverflow.com/a/9039885/4009517
-const isIphone = () => {
-    return ['iPhone Simulator','iPhone'].includes(navigator.platform);
 }
