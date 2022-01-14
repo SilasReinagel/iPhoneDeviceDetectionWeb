@@ -19,21 +19,35 @@ const iPhoneDeviceModel = () => {
           }
       }
   }
+  const sh = window.screen.height;
+  const sw = window.screen.width;
+  const dpr = window.devicePixelRatio;
+  const r = detectionRenderer;
+
+  const isiPhone = isPhone();
+  if (!isiPhone)
+    return "Probably not an iPhone";
 
   // iPhone 13 Series
-  if (detectionRenderer == "Apple A15 GPU")
-    return "iPhone 13 Series";
+  if (sw == 1170 && sh == 2532 && dpr == 3)
+    return "iPhone 12/13 Standard/Pro";
+
+  if (sw == 1080 && sh == 2340 && dpr == 3)
+    return "iPhone 12/13 mini";
+  
+  if (sw == 2778 && sh == 2778 && dpr == 3)
+    return "iPhone 12/13 Pro Max";
   
   // iPhone 12 Series
-  if (detectionRenderer == "Apple A14 GPU")
+  if (r == "Apple A14 GPU")
     return "iPhone 12 Series";
 
   // iPhone 11 Series
-  if (detectionRenderer == "Apple A13 GPU")
+  if (r == "Apple A13 GPU")
     return "iPhone 11 Series";
 
   // iPhone XS Series (including XR)
-  if (detectionRenderer == "Apple A12 GPU")
+  if (r == "Apple A12 GPU")
     return "iPhone XS Series";
 
   // Below from StackOverflow: https://stackoverflow.com/a/49774317
